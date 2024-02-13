@@ -32,7 +32,7 @@ body {
   /* margin-top: 1px; */
 }
 
-#nav {
+nav {
 	margin-left: 2%;
   margin-right: 2%;
 	padding-top:10px;
@@ -41,9 +41,9 @@ body {
   background-color: black;
 }
 
-#nav li {
+nav li {
 	display:inline;
-	padding:100px;
+	padding:70px;
 	margin:0;
 }
 
