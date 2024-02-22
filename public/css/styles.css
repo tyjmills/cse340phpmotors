@@ -26,9 +26,11 @@ body {
   font-size: xx-large;
 }
 
-#tools {
-  text-align: right;
+.myaccount {
+  /* text-align: right; */
   margin-right: 15px;
+  padding-bottom: 2%;
+  padding-left: 75%;
   /* margin-top: 1px; */
 }
 
@@ -129,6 +131,62 @@ div #mainpart {
   height: 75%;
   object-fit: 50%;
   background-color: cadetblue;
+}
+
+
+button {
+  background-color: white;
+  color: black;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100px;
+  display: block;
+  border-radius: 25px;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
+div.container {
+  background-color: darkblue;
+  color:white;
+  max-width: 75%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: .5%;
+  padding-top: 2%;
+}
+
+div.container button {
+  margin-left: 10%;
+  margin-bottom: 10%;
+}
+
+div.container label {
+  display: block;
+  margin-left: 10%;
+}
+
+div.container input {
+  display: block;
+  margin-left: 10%;
+}
+
+div.container a {
+  color: white;
+  font-weight: bolder;
+  margin-left: 10%;
+}
+
+div.container ul {
+  display: block;
+  color: white;
+  font-weight: bolder;
+  margin-left: 10%;
 }
 
 /* .flux {
