@@ -182,6 +182,10 @@ div.container a {
   margin-left: 10%;
 }
 
+div.container span {
+  margin-left: 10%;
+}
+
 div.container ul {
   display: block;
   color: white;

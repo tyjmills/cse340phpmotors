@@ -105,10 +105,10 @@ Util.BuildInvInfo = async function(data) {
 Util.buildLogin 
     login = '<div class="container">'
     login += '<label for="email"><b>Email:</b></label>'
-    login += '<input type="text" placeholder="Enter Email" name="email" required>'
+    login += '<input type="email" placeholder="Enter Email" name="account_email" required>'
 
     login += '<label for="psw"><b>Password:</b></label>'
-    login += '<input type="password" placeholder="Enter Password" name="psw" required>'
+    login += '<input type="password" placeholder="Enter Password" name="account_password" required>'
 
     login += '<button type="submit">Login</button>'
     
@@ -128,10 +128,11 @@ register += '<label for="lastname"><b>Last name:</b></label>'
 register += '<input type="text" placeholder="Enter last name" name="account_lastname" required>'
 
 register += '<label for="email"><b>Email:</b></label>'
-register += '<input type="text" placeholder="Enter Email" name="account_email" required>'
+register += '<input type="email" placeholder="Enter Email" name="account_email" required>'
 
 register += '<label for="psw"><b>Password:</b></label>'
-register += '<input type="password" placeholder="Enter Password" name="account_password" required>'
+register += '<span>* Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>'
+register += '<input type="password" placeholder="Enter Password" name="account_password"  required>'// pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">'
 
 // register += '<ul class="passwordinfo>'    
 // register += '<li>12 characters in length, minimum</li>'
