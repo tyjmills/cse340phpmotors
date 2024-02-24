@@ -9,4 +9,13 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to build inventory by Individual id view
 router.get("/detail/:invId", invController.buildByInvId);
 
+// Route to management view
+router.get('/management', invController.buildManagement);
+
+// Route to add new classification view
+router.get('/newclassification', invController.buildNewClassification);
+
+// Route to add new vehicle view
+router.get('/newvehicle', invController.buildNewVehicle);
+
 module.exports = router;

@@ -37,5 +37,102 @@ invCont.buildByInvId = async function (req, res, next) {
   })
 }
 
+invCont.buildManagement = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+    errors: null,
+  })
+}
+
+invCont.buildNewClassification = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/newclassification", {
+    title: "New Classification",
+    nav,
+    errors: null,
+  })
+}
+
+invCont.buildNewVehicle = async function(req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/newvehicle", {
+    title: "New Vehicle",
+    nav,
+    errors: null,
+  })
+}
+
+ /* ****************************************
+*  Process New Classification
+* *************************************** */
+invCont.registerNewClassification = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { classification_name } = req.body
+
+  const regResult = await inventoryModel.registerNewClassification(
+    classification_name
+  )
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `A new car classification has been added.`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the new classification failed to add.")
+    res.status(501).render("inventory/newclassification", {
+      title: "New Classification",
+      nav,
+      errors: null,
+    })
+  }
+} 
+
+/* ****************************************
+*  Process New Vehicle
+* *************************************** */
+invCont.registerNewVehicle = async function(req, res) {
+  let nav = await utilities.getNav()
+  const { classification_id, inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color } = req.body
+
+  const regResult = await inventoryModel.registerNewVehicle(
+    classification_id, 
+    inv_make, 
+    inv_model, 
+    inv_year, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price, 
+    inv_miles, 
+    inv_color
+  )
+
+  if (regResult) {
+    req.flash(
+      "notice",
+      `A new vehicle has been added.`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Vehicle Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, the new vehicle failed to add.")
+    res.status(501).render("inventory/newvehicle", {
+      title: "New Vehicle",
+      nav,
+      errors: null,
+    })
+  }
+} 
 
 module.exports = invCont

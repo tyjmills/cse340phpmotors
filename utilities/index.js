@@ -134,17 +134,74 @@ register += '<label for="psw"><b>Password:</b></label>'
 register += '<span>* Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span>'
 register += '<input type="password" placeholder="Enter Password" name="account_password"  required>'// pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">'
 
-// register += '<ul class="passwordinfo>'    
-// register += '<li>12 characters in length, minimum</li>'
-// register += '<li>contain at least 1 capital letter</li>'
-// register += '<li>contain at least 1 number</li>'
-// register += '<li>contain at least 1 special character</li>'
-// register += '</ul>'
-
 register += '<button type="submit">Register</button>'
 
 register += '</div>'
 
+/* **************************************
+* Build the management view HTML
+* ************************************ */
+Util.buildManagement
+    manage = '<div class="container">'
+    manage += '<a href="./newclassification" title="add classification">Add New Classification</a>'
+    manage += '<a href="./newvehicle" title="add vehicle">Add New Vehicle</a>'
+    manage += '</div>'
+
+ /* **************************************
+* Build the create new classification view HTML
+* ************************************ */
+Util.buildNewClassification
+  newclass = '<div class="container">'
+  newclass += '<label for="firstname"><b>Classification Name:</b></label>'
+  newclass += '<span>NAME MUST BE ALPHABETIC CHARACTERS ONLY.</span>'
+  newclass += '<input type="text" placeholder="Enter new classification" name="classification_name" required>'
+  newclass += '<button type="submit">Add Classification</button>'
+  newclass += '</div>'
+
+/* **************************************
+* Build the create new vehicle view HTML
+* ************************************ */
+Util.buildNewVehicle 
+newvehicle = '<div class="container">'
+newvehicle += '<label for="classification"><b>Classification:</b></label>'
+newvehicle += '<select id="class" name="classification_name">'
+newvehicle += '<option value="1">Custom</option>'
+newvehicle += '<option value="2">Sport</option>'
+newvehicle += '<option value="3">SUV</option>'
+newvehicle += '<option value="4">Truck</option>'
+newvehicle += '<option value="5">Sedan</option>'
+newvehicle += '</select>'
+
+newvehicle += '<label for="make"><b>Make:</b></label>'
+newvehicle += '<input type="text" placeholder="Min of 3 characters" name="inv_make" required>'
+
+newvehicle += '<label for="model"><b>model:</b></label>'
+newvehicle += '<input type="email" placeholder="Min of 3 characters" name="inv_model" required>'
+
+newvehicle += '<label for="year"><b>Year:</b></label>'
+newvehicle += '<input type="text" placeholder="4-digit year" name="inv_year" required>'
+
+newvehicle += '<label for="description"><b>Description:</b></label>'
+newvehicle += '<input type="text" name="inv_description" required>'
+
+newvehicle += '<label for="lastname"><b>Image Path:</b></label>'
+newvehicle += '<input type="text" value="..images/vehicles/no-image.png" name="inv_image" required>'
+
+newvehicle += '<label for="lastname"><b>Thumbnail Path:</b></label>'
+newvehicle += '<input type="text" value="..images/vehicles/no-image-tn.png" name="inv_thumbnail" required>'
+
+newvehicle += '<label for="lastname"><b>Price:</b></label>'
+newvehicle += '<input type="text" placeholder="Decimal or integer" name="inv_price" required>'
+
+newvehicle += '<label for="lastname"><b>Miles:</b></label>'
+newvehicle += '<input type="text" placeholder="digits only" name="inv_miles" required>'
+
+newvehicle += '<label for="lastname"><b>Color:</b></label>'
+newvehicle += '<input type="text" name="inv_color" required>'
+
+newvehicle += '<button type="submit">Add Vehicle</button>'
+
+newvehicle += '</div>'
 
 /* ****************************************
  * Middleware For Handling Errors
