@@ -1,3 +1,4 @@
+const { editVehicle } = require("../controllers/invController")
 const invModel = require("../models/inventory-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -58,6 +59,39 @@ Util.buildClassificationGrid = async function(data){
     }
     return grid
   }
+
+  /* **************************************
+* Build the all inventory view HTML
+* ************************************ */
+Util.buildInventoryGrid = async function(data){
+  let invgrid
+  if(data.length > 0){
+    invgrid = '<ul id="inv-display">'
+    data.forEach(vehicle => { 
+      invgrid += '<li>'
+      invgrid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
+      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
+      + 'details"><img src="' + vehicle.inv_thumbnail 
+      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+      +' on CSE Motors" /></a>'
+      invgrid += '<div class="namePrice">'
+      invgrid += '<hr />'
+      invgrid += '<h2>'
+      invgrid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
+      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
+      invgrid += '</h2>'
+      invgrid += '<span>$' 
+      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+      invgrid += '</div>'
+      invgrid += '</li>'
+    })
+    invgrid += '</ul>'
+  } else { 
+    invgrid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return invgrid
+}
 
 /* **************************************
 * Build the inventory view HTML
@@ -147,6 +181,18 @@ Util.buildManagement
     manage = '<div class="container">'
     manage += '<a href="./newclassification" title="add classification">Add New Classification</a>'
     manage += '<a href="./newvehicle" title="add vehicle">Add New Vehicle</a>'
+    manage += '<h2>Manage Inventory</h2>'
+    manage += '<p>Select a classification from the list to see the items belonging to the classification</p>'
+    manage += '<label for="classification"><b>Classification:</b></label>'
+    manage += '<select id="class" name="classification_name">'
+    manage += '<option value="1">Custom</option>'
+    manage += '<option value="2">Sport</option>'
+    manage += '<option value="3">SUV</option>'
+    manage += '<option value="4">Truck</option>'
+    manage += '<option value="5">Sedan</option>'
+    manage += '</select>'
+    manage += '<table id="inventoryDisplay"></table>'
+    manage += '<noscript>JavaScript must be enabled to use this page.</noscript>'
     manage += '</div>'
 
  /* **************************************
@@ -204,6 +250,52 @@ newvehicle += '<input type="text" name="inv_color" required>'
 newvehicle += '<button type="submit">Add Vehicle</button>'
 
 newvehicle += '</div>'
+
+/* **************************************
+* Build the edit new vehicle view HTML
+* ************************************ */
+Util.buildNewVehicle 
+editvehicle = '<div class="container">'
+editvehicle += '<label for="classification"><b>Classification:</b></label>'
+editvehicle += '<select id="class" name="classification_name">'
+editvehicle += '<option value="1">Custom</option>'
+editvehicle += '<option value="2">Sport</option>'
+editvehicle += '<option value="3">SUV</option>'
+editvehicle += '<option value="4">Truck</option>'
+editvehicle += '<option value="5">Sedan</option>'
+editvehicle += '</select>'
+
+editvehicle += '<label for="make"><b>Make:</b></label>'
+editvehicle += '<input type="text" placeholder="Min of 3 characters" name="inv_make" required>'
+
+editvehicle += '<label for="model"><b>model:</b></label>'
+editvehicle += '<input type="email" placeholder="Min of 3 characters" name="inv_model" required>'
+
+editvehicle += '<label for="year"><b>Year:</b></label>'
+editvehicle += '<input type="text" placeholder="4-digit year" name="inv_year" required>'
+
+editvehicle += '<label for="description"><b>Description:</b></label>'
+editvehicle += '<input type="text" name="inv_description" required>'
+
+editvehicle += '<label for="lastname"><b>Image Path:</b></label>'
+editvehicle += '<input type="text" value="..images/vehicles/no-image.png" name="inv_image" required>'
+
+editvehicle += '<label for="lastname"><b>Thumbnail Path:</b></label>'
+editvehicle += '<input type="text" value="..images/vehicles/no-image-tn.png" name="inv_thumbnail" required>'
+
+editvehicle += '<label for="lastname"><b>Price:</b></label>'
+editvehicle += '<input type="text" placeholder="Decimal or integer" name="inv_price" required>'
+
+editvehicle += '<label for="lastname"><b>Miles:</b></label>'
+editvehicle += '<input type="text" placeholder="digits only" name="inv_miles" required>'
+
+editvehicle += '<label for="lastname"><b>Color:</b></label>'
+editvehicle += '<input type="text" name="inv_color" required>'
+
+editvehicle += '<button type="submit">Update Vehicle</button>'
+editvehicle += '<input type="hidden" name="inv_id"<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"<% } %>>'
+
+editvehicle += '</div>'
 
 /* ****************************************
 * Middleware to check token validity
