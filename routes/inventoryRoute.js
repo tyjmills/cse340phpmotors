@@ -15,7 +15,13 @@ router.get('/management', invController.buildManagement);
 // Route to add new classification view
 router.get('/newclassification', invController.buildNewClassification);
 
+// Route to add new classification view
+router.get('/newclassification', invController.registerNewClassification);
+
 // Route to add new vehicle view
 router.get('/newvehicle', invController.buildNewVehicle);
+
+// Route to add new classification view
+router.get('/newclassification', invController.buildNewVehicle);
 
 module.exports = router;
